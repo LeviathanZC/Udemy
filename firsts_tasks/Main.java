@@ -6,15 +6,17 @@ import java.util.Scanner;
 
 public class Main {
 
-    public static void main(String[] args) throws java.io.IOException, InterruptedException {
+    public static void main(String[] args) {
 
-        frontTask1();
+        frontTask2();
 
     }
 
     public static void frontTask1() {
 
-        int a; int b; int c;
+        int a;
+        int b;
+        int c;
 
         System.out.println("input a");
         a = input();
@@ -25,7 +27,7 @@ public class Main {
         System.out.println("input c");
         c = input();
 
-        if (isDifferent(a,b,c)) {
+        if (isDifferent(a, b, c)) {
             System.out.println("\nAll numbers is the same");
         } else {
             System.out.println("\nAll numbers is different");
@@ -35,6 +37,18 @@ public class Main {
 
     }
 
+    public static void frontTask2() {
+
+        System.out.print("input mass of dinosaur");
+        int massDinosaur = input();
+        System.out.println("\nmass of dinosaur is " + massDinosaur + " kg");
+        System.out.println("\n\nmass of dinosaur (mg) is " + transferToMg(massDinosaur) + " mg");
+        System.out.println("\n\nmass of dinosaur (g) is " + transferToGr(massDinosaur) + " g");
+        System.out.println("\n\nmass of dinosaur (t) is " + transferToTons(massDinosaur) + " t");
+
+    }
+
+
     public static int input() throws InputMismatchException {
 
         Scanner scan = new Scanner(System.in);
@@ -42,6 +56,9 @@ public class Main {
         /**
          **  Обработка исключения при вводе числа
          **       с помощью утилиты Scanner
+         **
+         **
+         **
          **/
 
         try {
@@ -59,7 +76,6 @@ public class Main {
             return 0;
 
         }
-
     }
 
     public static boolean isDifferent(int a, int b, int c) {
@@ -69,5 +85,24 @@ public class Main {
         } else return false;
 
     }
+
+    public static float transferToTons(int num){
+
+        return num * 0.001F;
+
+    }
+
+    public static int transferToGr(int num){
+
+        return num * 1000;
+
+    }
+
+    public static long transferToMg(int num){
+
+        return ((long)num) * 1_000_000;
+
+    }
+
 
 }
