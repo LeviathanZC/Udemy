@@ -3,7 +3,6 @@ package com.company.epam.firsts_tasks;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import static java.lang.Runtime.getRuntime;
 
 public class Main {
 
@@ -13,9 +12,7 @@ public class Main {
 
     }
 
-    public static void frontTask1() throws java.io.IOException, InterruptedException {
-        Runtime runtime = getRuntime();
-
+    public static void frontTask1() {
 
         int a; int b; int c;
 
