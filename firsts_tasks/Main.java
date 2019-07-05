@@ -8,11 +8,16 @@ public class Main {
 
     public static void main(String[] args) {
 
-        frontTask2();
+        frontTask3();
 
     }
 
-    public static void frontTask1() {
+
+    /**
+     **  Разработайте программу, которая проверяет,
+     **      что числа a, b и c различны (одинаковы).
+     **/
+    private static void checkingNums() {
 
         int a;
         int b;
@@ -37,7 +42,12 @@ public class Main {
 
     }
 
-    public static void frontTask2() {
+
+    /**
+     **      Масса динозавра задаётся в килограммах. Разработайте программу,
+     **          которая вычисляет, сколько это миллиграмм, грамм и тонн.
+     **/
+    private static void transferDinoMass() {
 
         System.out.print("input mass of dinosaur");
         int massDinosaur = input();
@@ -46,10 +56,29 @@ public class Main {
         System.out.println("\n\nmass of dinosaur (g) is " + transferToGr(massDinosaur) + " g");
         System.out.println("\n\nmass of dinosaur (t) is " + transferToTons(massDinosaur) + " t");
 
+        System.out.println("\n program successfully completed!");
     }
 
 
-    public static int input() throws InputMismatchException {
+
+    /**
+     **      На плоскости даны два круга с общим центром и радиусами R1 и R2 (R1 > R2).
+     **      Разработайте программу нахождения площади кольца, внешний радиус которого
+     **                   равен R1, а внутренний радиус равен R2.
+     **/
+    private static void frontTask3() {
+
+        System.out.println("input radius R1");
+        int r1 = input();
+        System.out.println("input radius R2");
+        int r2 = input();
+        System.out.println("the ring area equals " + areaOfRing(areaOfCircle(r1), areaOfCircle(r2)));
+
+        System.out.println("\n program successfully completed!");
+    }
+
+
+    private static int input() throws InputMismatchException {
 
         Scanner scan = new Scanner(System.in);
 
@@ -78,7 +107,7 @@ public class Main {
         }
     }
 
-    public static boolean isDifferent(int a, int b, int c) {
+    private static boolean isDifferent(int a, int b, int c) {
 
         if (a == b && b == c) {
             return true;
@@ -86,22 +115,37 @@ public class Main {
 
     }
 
-    public static float transferToTons(int num){
+    private static float transferToTons(int num) {
 
         return num * 0.001F;
 
     }
 
-    public static int transferToGr(int num){
+    private static int transferToGr(int num) {
 
         return num * 1000;
 
     }
 
-    public static long transferToMg(int num){
+    private static long transferToMg(int num) {
 
-        return ((long)num) * 1_000_000;
+        return ((long) num) * 1_000_000;
 
+    }
+
+    private static double areaOfCircle(int R) {
+
+        return Math.PI * (R * R);
+
+    }
+
+    private static double areaOfRing(double area1, double area2) {
+        if (area1 > area2) {
+            return area1 - area2;
+        } else {
+            System.out.println("inversion of areas...");
+            return area2 - area1;
+        }
     }
 
 
