@@ -9,7 +9,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-
+        isTriangle();
 
         System.out.println("\n program successfully completed!");
 
@@ -180,6 +180,54 @@ public class Main {
 
     }
 
+
+    // SECOND PART
+
+    /**
+     * На прямоугольной декартовой системе координат на плоскости заданы три точки
+     * с соответствующими координатами в виде пары значений (x,y).
+     * Определить, являются ли данные точки вершинами треугольника.
+     * И если да, то дополнительно определить, является ли данный треугольник прямоугольным.
+     **/
+    private static void isTriangle() {
+
+        int x1, x2, x3;
+        int y1, y2, y3;
+
+        System.out.println("input coords of triangle vertex");
+
+        System.out.print("\n input x1: ");
+        x1 = input();
+        System.out.print("\n input y1: ");
+        y1 = input();
+        System.out.print("\n input x2: ");
+        x2 = input();
+        System.out.print("\n input y2: ");
+        y2 = input();
+        System.out.print("\n input z3: ");
+        x3 = input();
+        System.out.println("\n input y3: ");
+        y3 = input();
+
+        if (isOnOneLine(x1, x2, x3, y1, y2, y3)) {
+
+            System.out.println("this is not triangle ( this can be degenerate triangle )");
+
+        } else {
+
+            System.out.println("this is a triangle");
+
+            outputLengthOfTriangle(x1, x2, x3, y1, y2, y3);
+
+            if (isRectangular(lengthOfLine(x1, y1, x2, y2), lengthOfLine(x2, y2, x3, y3), lengthOfLine(x3, y3, x1, y1))) {
+                System.out.println("This triangle is rectangular");
+            } else {
+                System.out.println("This triangle is NOT rectangular");
+            }
+
+        }
+
+    }
 
 
     // метод ввода данных с проверкой на ввод
@@ -373,10 +421,52 @@ public class Main {
 
     }
 
-    // метод возвращающий количество цифр в числе
+    // метод, возвращающий количество цифр в числе
     private static int countOfNums(int num) {
 
         return (num == 0) ? 1 : (int) Math.ceil(Math.log10(Math.abs(num) + 0.5));
+
+    }
+
+    // метод, определяющий, находятся ли точки на одной линии
+    private static boolean isOnOneLine(int x1, int x2, int x3, int y1, int y2, int y3) {
+
+        return isDifferent(x1, x2, x3) || isDifferent(y1, y2, y3);
+
+    }
+
+    // метод, возвращающий длину отрезка, заданного координатами х1,2 у1,2
+    private static double lengthOfLine(int x1, int y1, int x2, int y2) {
+
+        return Math.sqrt(Math.pow((x2 - x1), 2) + Math.pow((y2 - y1), 2));
+
+    }
+
+    // метод, определяющий прямоугольный треугольник по теореме Пифагора
+    private static boolean isRectangular(double x1, double x2, double x3) {
+
+        double hypotenuse = greaterNumOfThreeNums(x1, x2, x3);
+        double sqrHypo = hypotenuse * hypotenuse;
+
+        return sqrHypo == (x1 * x1 + x2 * x2) || (sqrHypo) == (x2 * x2 + x3 * x3) || sqrHypo == (x3 * x3 + x1 * x1);
+
+    }
+
+    // метод, вычисляющий наибольшее число из трех
+    private static double greaterNumOfThreeNums(double x1, double x2, double x3) {
+
+        double temp = Math.max(x1, x2);
+
+        return Math.max(temp, x3);
+
+    }
+
+    private static void outputLengthOfTriangle(int x1, int x2, int x3, int y1, int y2, int y3) {
+
+        System.out.println("this triangle has sides of ");
+        System.out.println(lengthOfLine(x1, y1, x2, y2) + " cm");
+        System.out.println(lengthOfLine(x2, y2, x3, y3) + " cm");
+        System.out.println(lengthOfLine(x3, y3, x1, y1) + " cm");
 
     }
 
