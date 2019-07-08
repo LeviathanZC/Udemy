@@ -9,7 +9,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        isTriangle();
+
 
         System.out.println("\n program successfully completed!");
 
@@ -224,6 +224,41 @@ public class Main {
             } else {
                 System.out.println("This triangle is NOT rectangular");
             }
+
+        }
+
+    }
+
+
+    /**
+     * В молодом возрасте дракон каждый год отращивает по три головы, но после того,
+     * как ему исполнится 200 лет – только по две, а после 300 лет – лишь по одной.
+     * Предполагается, что дракон появляется на свет сразу с тремя головами.
+     * Разработайте программу, которая высчитывала бы, сколько голов и глаз у дракона, которому N лет?
+     **/
+    private static void howManyHeadsAndEyes() {
+
+        System.out.println("input age of Dragon");
+        int age = input();
+
+        if (age > 200) {
+
+            if (age > 300) {
+
+                int heads = (age - 300) + 100 * 2 + 200 * 3;
+                System.out.println("Dragon have " + heads + " heads and " + (heads * 2) + " eyes");
+
+            } else {
+
+                int heads = (age - 200) * 2 + 200 * 3;
+                System.out.println("Dragon have " + heads + " heads and " + (heads * 2) + " eyes");
+
+            }
+
+        } else {
+
+            int heads = age * 3;
+            System.out.println("Dragon have " + heads + " heads and " + (heads * 2) + " eyes");
 
         }
 
@@ -461,6 +496,7 @@ public class Main {
 
     }
 
+    // метод, выводящий в консоль длины сторон треугольника
     private static void outputLengthOfTriangle(int x1, int x2, int x3, int y1, int y2, int y3) {
 
         System.out.println("this triangle has sides of ");
@@ -469,5 +505,6 @@ public class Main {
         System.out.println(lengthOfLine(x3, y3, x1, y1) + " cm");
 
     }
+
 
 }
