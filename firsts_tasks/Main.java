@@ -9,7 +9,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-
+        whatIsTheNextDay();
 
         System.out.println("\n program successfully completed!");
 
@@ -264,6 +264,185 @@ public class Main {
 
     }
 
+    /**
+     * Напишите программу, которая бы определяла, является ли введённая буква (символ) гласной
+     * (постарайтесь сделать минимум четырьмя способами, разрешается и больше).
+     **/
+    private static void isVowel() throws java.io.IOException {
+
+        boolean access = false;
+        int type;
+
+        System.out.println("input type of checking letter ( 1..4)");
+        do {
+
+            access = (((type = input()) >= 0) && ((type = input()) <= 4));
+            if (access) {
+                System.out.println("Failed... try again");
+            }
+
+        } while (!access);
+
+        System.out.print("input the letter: ");
+        char ch = (char) System.in.read();
+
+        switch (type) {
+            case 1: {
+                if (isVowelFirstMethod(ch)) {
+                    System.out.println("This is vowel");
+                } else {
+                    System.out.println("This is consonant letter or is not letter at all");
+                }
+                break;
+            }
+            case 2: {
+                if (isVowelSecondMethod(ch)) {
+                    System.out.println("This is vowel");
+                } else {
+                    System.out.println("This is consonant letter or is not letter at all");
+                }
+                break;
+            }
+            case 3: {
+                if (isVowelThirdMethod(ch)) {
+                    System.out.println("This is vowel");
+                } else {
+                    System.out.println("This is consonant letter or is not letter at all");
+                }
+                break;
+            }
+            case 4: {
+                if (isVowelFourthMethod(ch)) {
+                    System.out.println("This is vowel");
+                } else {
+                    System.out.println("This is consonant letter or is not letter at all");
+                }
+                break;
+            }
+            default: {
+                System.out.println("Unexpected token");
+            }
+        }
+
+
+    }
+
+    /**
+     * Заданы три целых числа, которые задают некоторую дату по Грегорианскому календарю
+     * (https://ru.wikipedia.org/wiki/Григорианский_календарь).
+     * Определить дату следующего дня. Запрещается использовать типы стандартной библиотеки
+     * языка для работы с датой и временем.
+     * Также необходимо учесть то, что по григорианскому календарю (используется в настоящий момент)
+     * високосный год определяется следующим образом:
+     *  годы, кратные 4 – високосные (например, 2008, 2012, 2016);
+     *  годы, кратные 4 и 100 – невисокосные (например, 1700, 1800, 1900);
+     *  годы, кратные 4, 100 и 400 – високосные (например, 1600, 2000, 2400).
+     **/
+    private static void whatIsTheNextDay() {
+
+        boolean access = false;
+        int day = 1;
+        int month = 1;
+        int year = 1970;
+        boolean leap = false;
+
+
+        System.out.println("input today's date");
+        do {
+
+            System.out.print("\tday : ");
+            day = input();
+            System.out.println();
+
+            // проверка на существование введенного дня
+            if (day > 31 || day < 1) {
+
+                System.out.println("incorrect data. Day cannot be bigger than 31 and less than 1");
+
+            } else {
+
+                access = true;
+
+
+                do {
+                    System.out.print("\tmonth : ");
+                    month = input();
+                    System.out.println();
+
+                    // проверка на существование месяца
+                    if (month > 12 || month < 1) {
+
+                        System.out.println("incorrect data. Month cannot be bigger than 12 and less than 1");
+                        access = false;
+
+                    } else {
+
+                        access = true;
+
+
+                        do {
+                            System.out.print("\tyear : ");
+                            year = input();
+                            System.out.println();
+
+                            if (year < 0 || year < 1970) {
+
+                                System.out.println("there is no internet and Java here. Try again :P");
+
+                            } else {
+
+                                if (year % 4 == 0 && year % 100 == 0 && year % 400 == 0) {
+                                    System.out.println("this year is a leap year\n");
+                                    leap = true;
+                                }
+
+                                if (leap && day > 29) {
+
+                                    System.out.println("incorrect data. February has only 29 days. " +
+                                            "Day has been reformatted from " + day + " to 29");
+
+                                } else if (day > 28 && month == 2) {
+
+                                    System.out.println("incorrect data. February has only 28 days. " +
+                                            "Day has been reformatted from " + day + " to 28");
+
+                                }
+                            }
+
+                        } while (!access);
+
+                    }
+
+                } while (!access);
+            }
+
+        } while (!access);
+
+        day++;
+
+        // в феврале 28(9) дней
+        if ((leap && (month == 2 && day > 29)) || month == 2 && day > 28) {
+            day = 1;
+            month++;
+        } else if (month == 6 && day > 31) {
+            day = 1;
+            month++;
+        } else if (month == 12 && day > 31) {
+            day = 1;
+            month = 1;
+            year++; //новый год :D
+        } else if (month % 2 == 0 && day > 30) {
+            day = 1;
+            month++;
+        } else if (day > 31) {
+            day = 1;
+            month++;
+        }
+
+        System.out.println("Next day date is : " + day + "." + month + "." + year);
+
+
+    }
 
     // метод ввода данных с проверкой на ввод
     private static int input() throws InputMismatchException {
@@ -506,5 +685,83 @@ public class Main {
 
     }
 
+    // метод, определяющий гласную, путем перебора гласных через оператор SWITCH
+    private static boolean isVowelFirstMethod(char ch) {
 
+        boolean isVowel;
+        char chr = Character.toLowerCase(ch);
+
+        switch (ch) {
+            case 'a':
+            case 'e':
+            case 'i':
+            case 'o':
+            case 'u': {
+                isVowel = true;
+                break;
+            }
+            case 'y':
+            case 'w': {
+                System.out.println("Conventionally");
+                isVowel = true;
+                break;
+            }
+            default: {
+
+                isVowel = false;
+            }
+
+
+        }
+        return isVowel;
+    }
+
+    // метод, определяющий гласную, путем перебора символов заданной строки
+    private static boolean isVowelSecondMethod(char ch) {
+        char chr = Character.toLowerCase(ch);
+        String vowels = "aeiouyw";
+        boolean isVowel = false;
+
+        for (int i = 0; i < vowels.length(); i++) {
+
+            if (chr == vowels.charAt(i)) {
+                isVowel = true;
+            }
+
+        }
+
+        return isVowel;
+    }
+
+    // метод, определяющий гласную, путем проверки управляющими операторами IF-ELSE
+    private static boolean isVowelThirdMethod(char ch) {
+
+        char chr = Character.toLowerCase(ch);
+        boolean isVowel = false;
+
+        if (chr == 'a') {
+            isVowel = true;
+        } else if (chr == 'e') {
+            isVowel = true;
+        } else if (chr == 'i') {
+            isVowel = true;
+        } else if (chr == 'o') {
+            isVowel = true;
+        } else if (chr == 'u') {
+            isVowel = true;
+        } else if (chr == 'y') {
+            isVowel = true;
+        } else if (chr == 'y') {
+            isVowel = true;
+        }
+
+        return isVowel;
+    }
+
+    // NOT READY! TODO!
+    private static boolean isVowelFourthMethod(char ch) {
+
+        return isVowelSecondMethod(ch);
+
+    }
 }
