@@ -240,50 +240,19 @@ public class Main {
      **/
 
     private static void friendlyNumbers() {
+
         System.out.println("input interval ");
 
-        System.out.print("\n input [");
-        int a = input();
-        System.out.print(a + ",");
-        int b = input();
-        System.out.println("] - the interval is complete!");
+        System.out.print("\n input :");
+        int leftBorder = input();
+        int rightBorder = input();
+        System.out.println("[" + leftBorder + "," + rightBorder + "] - the interval is complete!");
 
-        int sum; // сумма делителей первого числа
-        int sum1; // сумма делителей s
-
-        // цикл для проверки первых чисел
-        for (int i = a; i < b; i++) {
-
-            sum = 0;
-
-            // находим все делители числа а, исключая само число
-            for (int j = 1; j < a - 1; j++) {
-
-                if (a % i == 0) { // поиск суммы делителей a
-                    sum += i;
-                }
-
-            }
-
-            sum1 = 0;
-
-            for (int k = 1; k < sum - 1; k++) {
-
-                if (sum % k == 0) {
-                    sum1 += k;
-                }
-
-            }
-
-            if ((sum1 == i) && (sum != i)) {
-                System.out.println("numbers " + i + " and " + sum + " is friendly");
-            }
-        }
+        OutputFriendlyNumbers(leftBorder, rightBorder);
 
 
     }
     //TODO: переписать заново алгоритм решения
-
 
 
     // ОБЛАСТЬ ПРИКЛАДНЫХ МЕТОДОВ
@@ -419,6 +388,7 @@ public class Main {
 
     }
 
+
     // метод возвращающий количество различных цифр, входящих в одно число
     private static int numberOfDigits(int number) {
 
@@ -517,5 +487,32 @@ public class Main {
 
         return sum == number;
 
+    }
+
+    // метод поиска суммы делителей числа i
+    private static int sumDivisors(int i) {
+
+        int sum = 0;
+
+        for (int j = 1; j <= i / 2; j++) {
+
+            if (i % j == 0) {
+                sum += j;
+            }
+
+        }
+
+        return sum;
+    }
+
+    private static void OutputFriendlyNumbers (int leftBorder, int rightBorder) {
+        for (int i = leftBorder; i < rightBorder; i++) {
+            for (int j = i + 1; j <= rightBorder; j++) {
+
+                if (sumDivisors(i) == j && sumDivisors(j) == i) {
+                    System.out.println(i + " and " + j + " is friendly numbers");
+                }
+            }
+        }
     }
 }
