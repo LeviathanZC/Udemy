@@ -9,7 +9,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        whatIsTheNextDay();
+
 
         System.out.println("\n program successfully completed!");
 
@@ -443,6 +443,19 @@ public class Main {
 
 
     }
+
+    
+
+
+
+
+
+
+
+
+
+
+
 
     // метод ввода данных с проверкой на ввод
     private static int input() throws InputMismatchException {
