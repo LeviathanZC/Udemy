@@ -2,10 +2,16 @@ package com.company.epam.third_tasks;
 
 import java.util.Arrays;
 
+/*
+    КЛАСС ОСУЩЕСТВЛЯЮЩИЙ СОРТИРОВКУ ОДНОМЕРНЫХ МАССИВОВ
+    НЕСКОЛЬКИМИ СПОСОБАМИ
+ */
+
 public class Sorting {
 
     private static int[] array;
     private static int arrLength;
+    private static boolean isSorted = false;
 
     private static String TYPE;
 
@@ -13,11 +19,15 @@ public class Sorting {
         setArray(arr);
         setArrLength();
         setType(type);
-        System.out.println(TYPE);
     }
 
-    public static int[] sort() {
 
+
+
+
+
+    public static int[] sort() {
+        isSorted = true;
         switch (TYPE) {
             case "bubble": {
                 bubbleSort();
@@ -32,10 +42,12 @@ public class Sorting {
                 return array;
             }
             case "merge": {
-
+                mergeSort(array, arrLength);
+                return array;
             }
             case "quick": {
-
+                initQuick();
+                return array;
             }
             default: {
                 System.out.println("unexpected token of TYPE");
@@ -45,6 +57,9 @@ public class Sorting {
 
     }
 
+    /*
+            МЕТОДЫ СОРТИРОВОК
+     */
 
     //метод пузырьковой сортировки массива
     private static void bubbleSort() {
@@ -61,6 +76,7 @@ public class Sorting {
         }
     }
 
+    //метод реализация сортировки вставками
     private static void insertionSort() {
 
         for (int left = 0; left < arrLength; left++) {
@@ -82,6 +98,7 @@ public class Sorting {
         }
     }
 
+    //метод реализация сортировки выбором
     private static void selectionSort() {
 
         for (int i = 0; i < arrLength - 1; i++) {
@@ -103,6 +120,7 @@ public class Sorting {
 
     }
 
+    //метод реализация сортировки слиянием
     private static void mergeSort(int[] array, int arrLength) {
         if (arrLength < 2) {
             return;
@@ -124,14 +142,14 @@ public class Sorting {
         merge(array, l, r, mid, arrLength - mid);
     }
 
+    //метод реализация слияния
     private static void merge(int[] a, int[] l, int[] r, int left, int right) {
 
         int i = 0, j = 0, k = 0;
         while (i < left && j < right) {
             if (l[i] <= r[j]) {
                 a[k++] = l[i++];
-            }
-            else {
+            } else {
                 a[k++] = r[j++];
             }
         }
@@ -143,11 +161,51 @@ public class Sorting {
         }
     }
 
-
-
-    private static void quickSort() {
-
+    //метод для инициализации соритровки qSort
+    private static void initQuick() {
+        int startIndex = 0;
+        int endIndex = arrLength - 1;
+        quickSort(startIndex, endIndex);
     }
+
+    //метод реализация алгоритма быстрой сортировки
+    private static void quickSort(int start, int end) {
+        if (start >= end)
+            return;
+        int i = start, j = end;
+        int cur = i - (i - j) / 2;
+        while (i < j) {
+            while (i < cur && (array[i] <= array[cur])) {
+                i++;
+            }
+            while (j > cur && (array[cur] <= array[j])) {
+                j--;
+            }
+            if (i < j) {
+                int temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
+                if (i == cur)
+                    cur = j;
+                else if (j == cur)
+                    cur = i;
+            }
+        }
+        quickSort(start, cur);
+        quickSort(cur + 1, end);
+    }
+
+
+
+
+
+
+    /*
+            МЕТОДЫ СЕТТЕРЫ/ИНИЦИАЛИЗАТОРЫ
+            ВСПОМОГАТЕЛЬНЫЕ МЕТОДЫ
+     */
+
+
 
 
     //сеттер для массива
@@ -166,6 +224,9 @@ public class Sorting {
         TYPE = type.toLowerCase();
     }
 
+    public static boolean getCondition(){
+        return isSorted;
+    }
 
     //метод перестановки местами двух элементов массива по индексу
     private static void swap(int index1, int index2) {

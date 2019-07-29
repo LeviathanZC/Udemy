@@ -3,7 +3,7 @@ package com.company.epam.third_tasks;
 import java.util.Arrays;
 
 /*
- * Корниюк Я.В.
+ * KARNIYUK Y. V.
  * 29.08.2019
  * This programm has been developed
  * for learning arrays, sorting, and other stuff
@@ -15,6 +15,7 @@ public class OneDimensionalArray {
     //объявление вектора (одномерного массива)
     private static int[] vector;
     private static int vectorLength;
+    private static Sorting sorting;
 
     public OneDimensionalArray() {
 
@@ -26,13 +27,18 @@ public class OneDimensionalArray {
         outputExtremalValues();
         reverse();
         System.out.println(Arrays.toString(vector));
-        Sorting sorting = new Sorting(vector, "selection");
+        sorting = new Sorting(vector, "merge");
         vector = sorting.sort();
         System.out.println(Arrays.toString(vector));
-
+        outputArithmeticAndGeometricMeans();
 
     }
 
+
+
+    /*
+        ПОИСК ЭКСТРЕМУМОВ МАССИВА
+     */
 
     //вывод экстремальных значений
     private static void outputExtremalValues() {
@@ -63,30 +69,6 @@ public class OneDimensionalArray {
         } else {
 
             return returnArr;
-
-        }
-    }
-
-    //сеттер, генерирующий пустой целочисленный массив с переменной длиной, заданных в диапазоне [a,b)
-    private static void setVector(int a, int b) {
-        vector = new int[randomOfRange(a, b)];
-    }
-
-    //метод сеттер для длины вектора
-    private static void setVectorLength() {
-        vectorLength = vector.length;
-    }
-
-    //метод, возвращающий случайное число в заданном диапазоне [a,b)
-    private static int randomOfRange(int a, int b) {
-        return (int) Math.round(Math.random() * (b - a) + a);
-    }
-
-    //метод, заполняющий вектор рандомно в заданном диапазоне
-    private static void randomFillVector(int a, int b) {
-        for (int i = 0; i < vectorLength; i++) {
-
-            vector[i] = randomOfRange(a, b);
 
         }
     }
@@ -123,26 +105,48 @@ public class OneDimensionalArray {
 
     }
 
+    /*
+        ВЫЧИСЛЕНИЕ СРЕДНИХ АРИФМЕТИЧЕСКОГО И ГЕОМЕТРИЧЕСКОГО
+     */
+
+    //метод для вывода средних арифметического и гемоетрического
+    private static void outputArithmeticAndGeometricMeans() {
+
+        System.out.println("arithmetic mean of vector is : " + arithmeticMean());
+        System.out.println("geometric mean of vector is : " + geometricMean());
+
+    }
+
     //метод, возвращающий среднее арифметическое элементов массива
-    private static double arithmeticMean(int[] array) {
-        int arrLength = array.length;
+    private static double arithmeticMean() {
         int sum = 0;
-        for (int i : array) {
-            sum += array[i];
+        for (int i : vector) {
+            sum += vector[i];
         }
-        return sum / arrLength;
+        return sum / vectorLength;
     }
 
     //метод, возвращающий среднее геометрическое элементов массива
-    private static double geometricMean(int[] array) {
+    private static double geometricMean() {
 
-        int arrLength = array.length;
         int product = 1;
-        for (int i : array) {
-            product *= array[i];
+        for (int i : vector) {
+            product *= vector[i];
         }
 
-        return Math.pow(product, -arrLength);
+        return Math.pow(product, -vectorLength);
+
+    }
+
+    private static void calcOrder() {
+
+        if (sorting.getCondition()) {
+
+
+
+        } else {
+            System.out.println("elements of vector are not sorted");
+        }
 
     }
 
@@ -169,4 +173,48 @@ public class OneDimensionalArray {
             vector[index1] -= vector[index2];
         }
     }
+
+
+    /*
+        МЕТОДЫ СЕТТЕРЫ/ИНИЦИАЛИЗАТОРЫ
+        ВСПОМОГАТЕЛЬНЫЕ МЕТОДЫ
+     */
+
+    //сеттер, генерирующий пустой целочисленный массив с переменной длиной, заданных в диапазоне [a,b)
+    private static void setVector(int a, int b) {
+        vector = new int[randomOfRange(a, b)];
+    }
+
+    //метод сеттер для длины вектора
+    private static void setVectorLength() {
+        vectorLength = vector.length;
+    }
+
+    //метод, возвращающий случайное число в заданном диапазоне [a,b)
+    private static int randomOfRange(int a, int b) {
+        return (int) Math.round(Math.random() * (b - a) + a);
+    }
+
+    //метод, заполняющий вектор рандомно в заданном диапазоне
+    private static void randomFillVector(int a, int b) {
+        for (int i = 0; i < vectorLength; i++) {
+
+            vector[i] = randomOfRange(a, b);
+
+        }
+    }
+
+    private static boolean isAscending() {
+
+        int i = 0;
+        boolean isAscending = false;
+
+        do {
+            i++;
+        } while (vector[i] < vector[i + 1] && i < vectorLength);
+
+        return (i == vectorLength) ? true : false;
+
+    }
+
 }
