@@ -220,7 +220,7 @@ public class Sorting {
     }
 
     //сеттер для переменной, хранящей выбранный тип сортировки
-    private static void setType(String type) {
+    public static void setType(String type) {
         TYPE = type.toLowerCase();
     }
 
