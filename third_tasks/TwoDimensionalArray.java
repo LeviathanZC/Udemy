@@ -336,6 +336,7 @@ public class TwoDimensionalArray {
             return;
 
         } else {
+
             ARRAY[index1][index2] += ARRAY[index2][index1];
             ARRAY[index2][index1] = ARRAY[index1][index2] - ARRAY[index2][index1];
             ARRAY[index1][index2] -= ARRAY[index2][index1];
