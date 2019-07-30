@@ -42,10 +42,10 @@ public class OneDimensionalArray {
         outputLocals(localMin(), localMax());
         System.out.println();
 
-        searchElem(vector[(int)Math.random() * vectorLength], "linear");
+        searchElem(vector[(int)(Math.random() * vectorLength)], "linear");
         System.out.println();
-        searchElem(vector[(int)Math.random() * vectorLength], "binary");
-        System.out.println();
+        searchElem(vector[(int)(Math.random() * vectorLength)], "binary");
+        System.out.println( );
 
         reverse();
         System.out.println(Arrays.toString(vector) + "\n");

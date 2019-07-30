@@ -7,7 +7,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        firstTask();
+        //firstTask();
         secondTask();
 
         System.out.println("the program successfully complete!");
@@ -29,6 +29,12 @@ public class Main {
 
     public static void secondTask() {
 
+        System.out.println("THE SECOND TASK");
+        System.out.println("initializing 2-dim array \n");
+
+        TwoDimensionalArray tda = new TwoDimensionalArray(inputDimensions());
+
+        tda.mainTasks();
     }
 
     // метод ввода данных с проверкой на ввод
@@ -64,6 +70,7 @@ public class Main {
         }
     }
 
+    // метод вводы диапазона в массив
     private static int[] inputRange(String str) {
         System.out.println("input range of " + str.toUpperCase() + " length");
         int[] range = new int[2];
@@ -74,6 +81,7 @@ public class Main {
         return prepValsForArray(range);
     }
 
+    // метод для проверки значений
     private static int[] prepValsForArray(int[] arr) {
         if (arr[0] < arr[1]) {
             return arr;
@@ -83,6 +91,19 @@ public class Main {
             arr[0] -= arr[1];
             return arr;
         }
+    }
+
+    //метод для ввода размерностей двумерного массива
+    private static int[] inputDimensions(){
+
+        System.out.print("input N length : ");
+        int N = input();
+
+        System.out.print("input M length : ");
+        int M = input();
+
+        return new int[] {N, M};
+
     }
 
 
