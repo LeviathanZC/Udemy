@@ -1,4 +1,4 @@
-package com.company.epam.fourth_task.entities.employees;
+package com.company.epam.fourth_task.entities;
 
 public class Person {
 

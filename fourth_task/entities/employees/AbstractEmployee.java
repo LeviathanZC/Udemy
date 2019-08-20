@@ -1,5 +1,6 @@
 package com.company.epam.fourth_task.entities.employees;
 
+import com.company.epam.fourth_task.entities.Person;
 import com.company.epam.fourth_task.entities.enums.Levels;
 
 public abstract class AbstractEmployee extends Person {
